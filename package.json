@@ -1,0 +1,19 @@
+{
+  "name": "tp-swagger-api",
+  "version": "1.0.0",
+  "description": "Documentación de API con Swagger UI y Swagger-Autogen",
+  "main": "src/app.js",
+  "scripts": {
+    "swagger": "node swagger.js",
+    "start": "node swagger.js && node src/app.js",
+    "dev": "node swagger.js && nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.10",
+    "swagger-autogen": "^2.23.7"
+  }
+}

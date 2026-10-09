@@ -1,0 +1,222 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Gestión de Productos",
+    "description": "Documentación interactiva con Swagger para el Trabajo Práctico.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/productos": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Obtiene la lista completa de productos",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Lista de productos obtenida correctamente.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Producto"
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Crea un nuevo producto",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos para crear un producto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NuevoProducto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Producto creado exitosamente.",
+            "schema": {
+              "$ref": "#/definitions/Producto"
+            }
+          },
+          "400": {
+            "description": "Solicitud incorrecta por datos faltantes o inválidos.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/productos/{id}": {
+      "get": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Obtiene un producto por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID del producto a buscar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto encontrado.",
+            "schema": {
+              "$ref": "#/definitions/Producto"
+            }
+          },
+          "404": {
+            "description": "Producto no encontrado.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Modifica un producto existente",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID del producto a modificar"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos actualizados del producto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NuevoProducto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto actualizado exitosamente.",
+            "schema": {
+              "$ref": "#/definitions/Producto"
+            }
+          },
+          "404": {
+            "description": "Producto no encontrado para actualizar.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Elimina un producto por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID del producto a eliminar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto eliminado exitosamente."
+          },
+          "404": {
+            "description": "Producto no encontrado.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Producto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "nombre": {
+          "type": "string",
+          "example": "Notebook Lenovo"
+        },
+        "precio": {
+          "type": "number",
+          "example": 850000
+        },
+        "stock": {
+          "type": "number",
+          "example": 10
+        }
+      }
+    },
+    "NuevoProducto": {
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string",
+          "example": "Notebook Lenovo"
+        },
+        "precio": {
+          "type": "number",
+          "example": 850000
+        },
+        "stock": {
+          "type": "number",
+          "example": 10
+        }
+      },
+      "required": [
+        "nombre",
+        "precio",
+        "stock"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "example": "Descripción del error ocurrido"
+        }
+      }
+    }
+  }
+}
